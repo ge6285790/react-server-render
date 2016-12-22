@@ -1,0 +1,25 @@
+{
+  "name": "react-server-render",
+  "version": "1.0.0",
+  "description": "react-server-render",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ge6285790/react-server-render.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "server-render",
+    "isomorphic"
+  ],
+  "author": "kyle cheng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ge6285790/react-server-render/issues"
+  },
+  "homepage": "https://github.com/ge6285790/react-server-render#readme"
+}
