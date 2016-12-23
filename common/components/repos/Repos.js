@@ -13,7 +13,6 @@ import React, { Component } from 'react';
 
 class Repos extends Component {
   render() {
-    console.log(this.props);
     return (
       <div>
         Repos

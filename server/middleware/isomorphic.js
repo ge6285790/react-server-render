@@ -1,35 +1,29 @@
-// isomorphic
 import React from 'react';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import serialize from 'serialize-javascript';
-//
-// isomorphic
 import createRoutes from '../../common/routes/routes';
 import promiseMiddleware from '../../common/middleware/promiseMiddleware';
 import reducers from '../../common/reducers/index';
-//
-
 
 const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore);
-
 const store = finalCreateStore(reducers);
 const routes = createRoutes(store);
 
 function renderFullPage(url, html, initialState) {
   const jsSrc = (process.env.NODE_ENV === 'development') ? '/asset/js/bundle/bundle.js' : '/asset/js/bundle/bundle.min.js';
   const cssLink = (process.env.NODE_ENV === 'development') ? '' : '<link rel=stylesheet type="text/css" href="/asset/css/bundle/bundle.min.css">';
-
   let videoJs = '';
   let videoCss = '';
-  if (url.indexOf('live') !== -1 || url.indexOf('watch') !== -1) {
-    videoJs = `<script src='/asset/js/videojs/videojs.min.js'></script>
-                  <script async src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
 
-    videoCss = '<link href="/asset/css/videojs/videojs.min.css" rel="stylesheet">';
-  }
+  // if (url.indexOf('live') !== -1 || url.indexOf('watch') !== -1) {
+  //   videoJs = `<script src='/asset/js/videojs/videojs.min.js'></script>
+  //                 <script async src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
+  //
+  //   videoCss = '<link href="/asset/css/videojs/videojs.min.css" rel="stylesheet">';
+  // }
 
   return (
       `<!doctype html>
@@ -58,13 +52,11 @@ function renderFullPage(url, html, initialState) {
 
 export default function isomorphic(req, res) {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    console.log(renderProps);
     if (error) {
       res.send(500, error.message);
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      // res.send(200, renderToString(<RoutingContext {...renderProps} />));
       const initView = renderToString((
         <Provider store={store}>
           <RouterContext {...renderProps} />

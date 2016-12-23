@@ -11,14 +11,11 @@ import reducers from './reducers/index';
 const state = {
   // done: 'true',
 };
-console.log('1');
 const store = configureStore(state, reducers);
-console.log('2');
 const routes = createRoutes(store);
 
 
 match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
-  console.log('--',[...renderProps])
   render(
     <App
       store={store}

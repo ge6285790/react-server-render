@@ -36,7 +36,7 @@ import configureStores from '../store/configureStore';
 class App extends Component {
   render() {
     const { store, browserHistory, renderProps } = this.props;
-    console.log('renderProps', [...renderProps]);
+    // console.log('renderProps', [...renderProps]);
     return (
       <Provider store={store}>
         <Router history={browserHistory} {...renderProps} />
