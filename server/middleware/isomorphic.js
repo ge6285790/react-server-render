@@ -36,7 +36,7 @@ function renderFullPage(url, html, initialState) {
             <link rel='shortcut icon' href='/asset/img/favicon.ico' type='image/x-icon' />
             ${cssLink}
             ${videoJs}
-            <title>viewAV</title>
+            <title>isomorphic</title>
         </head>
         <body>
           <div id='root'>${html}</div>
