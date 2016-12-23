@@ -5,19 +5,14 @@ var flexibility = require('postcss-flexibility');
 
 module.exports = {
   entry: [
-    // app: [
-    'webpack-dev-server/client?http://localhost:8080',
-      // 'webpack/hot/dev-server',
-      // 'webpack-hot-middleware/client',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     'babel-polyfill',
     `${path.resolve(__dirname, 'common')}/app`,
-    // ],
   ],
   output: {
-    path: '/js/bundle/',
+    path: '/asset/js/bundle/',
     filename: 'bundle.js',
-    publicPath: '/js/bundle/',
+    publicPath: '/asset/js/bundle/',
     chunkFilename: 'chunk.[name].js',
   },
   resolve: {
@@ -30,10 +25,6 @@ module.exports = {
         loader: 'babel',
         include: path.resolve(__dirname, 'common'),
         exclude: /node_modules/,
-        // query: {
-        //   presets: ['react-hmre', "es2015", "stage-0", "react"],
-        //   plugins: ["transform-decorators-legacy"],
-        // }
       },
       {
         test: /\.json$/,
@@ -54,7 +45,7 @@ module.exports = {
       },
       {
         test: /\.js?$/,
-        loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react'],
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
         include: path.resolve(__dirname, 'common'),
         // include: path.join(__dirname, 'common'),
       },
@@ -72,12 +63,3 @@ module.exports = {
     }),
   ],
 };
-
-
-// babelrc
-// "plugins": ["babel-plugin-transform-decorators-legacy"],
-// "env": {
-//     "production": {
-//         "sourceMaps": false
-//     }
-// }

@@ -12,7 +12,7 @@ const app = express();
 
 // app.use(compression());
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 9000;
 
 app.use(WebpackDevMiddleware(compiler, {
   noInfo: true,
@@ -25,7 +25,7 @@ app.use(WebpackDevMiddleware(compiler, {
 // }));
 app.use(WebpackHotMiddleware(compiler));
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
