@@ -7,7 +7,7 @@ module.exports = {
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
-    `${path.resolve(__dirname, 'common')}/app`,
+    `${path.resolve(__dirname, 'common')}/main`,
   ],
   output: {
     path: '/asset/js/bundle/',
