@@ -2,7 +2,6 @@ export default function promiseMiddleware() {
     // next = dispatch
   return next => (action) => {
     const { promise, types, ...rest } = action;
-
     // if no promise attr, next
     if (!promise) {
       return next(action);
