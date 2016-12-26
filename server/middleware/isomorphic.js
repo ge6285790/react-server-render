@@ -7,6 +7,7 @@ import serialize from 'serialize-javascript';
 import createRoutes from '../../common/routes/routes';
 import promiseMiddleware from '../../common/middleware/promiseMiddleware';
 import reducers from '../../common/reducers/index';
+import fetchComponentsData from '../utils/fetchComponentsData';
 
 const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore);
 const store = finalCreateStore(reducers);
@@ -32,7 +33,7 @@ function renderFullPage(url, html, initialState) {
             <meta charset='utf-8'>
             <meta http-equiv='X-UA-Compatible' content='IE=edge'>
             <meta name='viewport' content='width=device-width, initial-scale=1'>
-            <meta name='description' content=''>
+            <meta name='descripti2efon' content=''>
             <link rel='shortcut icon' href='/asset/img/favicon.ico' type='image/x-icon' />
             ${cssLink}
             ${videoJs}
@@ -49,6 +50,19 @@ function renderFullPage(url, html, initialState) {
   );
 }
 
+function getPageTemplate(req, store, renderProps, components) {
+  console.log('store', store);
+  fetchComponentsData(store.dispatch, components, renderProps.params)
+    .then(() => {
+      const initView = renderToString((
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
+      ));
+      const state = store.getState();
+      return renderFullPage(req.url, initView, state);
+    });
+}
 
 export default function isomorphic(req, res) {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
@@ -57,14 +71,26 @@ export default function isomorphic(req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const initView = renderToString((
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      ));
-      const state = store.getState();
-      const page = renderFullPage(req.url, initView, state);
-      res.status(200).send(page);
+
+      // routing's leaf node put a static method fetchData(),
+      // in server,  we can use react-router's match  to get component and to execute static function
+      const components = renderProps.components[renderProps.components.length - 1].WrappedComponent;
+
+      fetchComponentsData(store.dispatch, components, renderProps.params)
+        .then(() => {
+          const initView = renderToString((
+            <Provider store={store}>
+              <RouterContext {...renderProps} />
+            </Provider>
+          ));
+          const state = store.getState();
+          return renderFullPage(req.url, initView, state);
+        })
+        .then((page) => {
+          res.status(200).send(page);
+        });
+      // const page = renderFullPage(req.url, initView, state);
+
     } else {
       res.send(404, 'Not found');
     }

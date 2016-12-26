@@ -5,6 +5,7 @@ import Home from '../components/home/Home';
 import Repos from '../components/repos/Repos';
 import Repo from '../components/repos/Repo';
 import About from '../components/about/About';
+import TestApi from '../components/test-api/test-api';
 
 export default function () {
   return (
@@ -15,6 +16,7 @@ export default function () {
         <Route path="/repos/:userName/:repoName" component={Repo} />
       </Route>
       <Route path="about" component={About} />
+      <Route path="/test-api" component={TestApi} />
     </Route>
   );
 }
