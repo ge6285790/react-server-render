@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Repo = (props) => <div>Repo</div>
+const Repo = (props) => <div className="repo">Repo</div>
 
 export default Repo;
