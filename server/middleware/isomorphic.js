@@ -51,7 +51,7 @@ function renderFullPage(url, html, initialState) {
 }
 
 function getPageTemplate(req, store, renderProps, components) {
-  console.log('store', store);
+  console.log('store', store, renderProps);
   fetchComponentsData(store.dispatch, components, renderProps.params)
     .then(() => {
       const initView = renderToString((
@@ -75,9 +75,10 @@ export default function isomorphic(req, res) {
       // routing's leaf node put a static method fetchData(),
       // in server,  we can use react-router's match  to get component and to execute static function
       const components = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-
+      console.log(components, renderProps);
       fetchComponentsData(store.dispatch, components, renderProps.params)
         .then(() => {
+
           const initView = renderToString((
             <Provider store={store}>
               <RouterContext {...renderProps} />
@@ -90,7 +91,6 @@ export default function isomorphic(req, res) {
           res.status(200).send(page);
         });
       // const page = renderFullPage(req.url, initView, state);
-
     } else {
       res.send(404, 'Not found');
     }

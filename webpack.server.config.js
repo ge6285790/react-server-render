@@ -25,7 +25,7 @@ module.exports = {
     __dirname: true,
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.json$/,
         loader: 'json-loader',
