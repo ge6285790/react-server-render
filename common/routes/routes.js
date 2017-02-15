@@ -12,8 +12,9 @@ export default function () {
     <Route path="/">
       <IndexRoute component={Home} />
       <Route path="/repos" component={Repos}>
-        {/* 需搭配 server 端的 router 功能建置，否則無法運行。 */}
-        <Route path="/repos/:userName/:repoName" component={Repo} />
+        {/* 需搭配 server 端的 router 功能建置（node必須重啟），否則無法運行。 */}
+        {/* <Route path="/repos/:userName/:repoName" component={Repo} /> */}
+        <Route path="/repos/:userName" component={Repo} />
       </Route>
       <Route path="about" component={About} />
       <Route path="/test-api" component={TestApi} />
