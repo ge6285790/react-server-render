@@ -1,6 +1,6 @@
 {
   "name": "react-server-render",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "react-server-render",
   "main": "server.js",
   "repository": {
@@ -14,7 +14,7 @@
     "isomorphic"
   ],
   "author": "kyle cheng",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ge6285790/react-server-render/issues"
   },
