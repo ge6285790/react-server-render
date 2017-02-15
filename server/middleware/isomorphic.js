@@ -75,7 +75,6 @@ export default function isomorphic(req, res) {
       // routing's leaf node put a static method fetchData(),
       // in server,  we can use react-router's match  to get component and to execute static function
       const components = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-      console.log(components, renderProps);
       fetchComponentsData(store.dispatch, components, renderProps.params)
         .then(() => {
 
