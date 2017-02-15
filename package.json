@@ -1,6 +1,6 @@
 {
   "name": "react-server-render",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "react-server-render",
   "main": "server.js",
   "repository": {
